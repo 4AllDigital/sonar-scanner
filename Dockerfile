@@ -1,4 +1,4 @@
-FROM openjdk:9
+FROM openjdk:11
 
 LABEL maintainer="4 All Digital  <joe@4alldigital.com>"
 
@@ -9,8 +9,8 @@ RUN apt-get -y update \
     && apt-get clean
 
 RUN apt-get -y update \
-    && apt-get -q install -y --no-install-recommends software-properties-common \
-    && curl -sL https://deb.nodesource.com/setup_8.x | bash
+    && apt-get -q install -y --no-install-recommends software-properties-common
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
 
 RUN apt-get -y update && \
     apt-get -q install -y --no-install-recommends \
@@ -24,7 +24,7 @@ RUN npm install -g yarn nodemon jest
 
 WORKDIR /root
 
-RUN curl --insecure -o ./sonarscanner.zip -L https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.0.3.778-linux.zip
+RUN curl --insecure -o ./sonarscanner.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
 RUN unzip sonarscanner.zip
 RUN rm sonarscanner.zip
 
